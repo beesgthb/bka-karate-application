@@ -9,14 +9,16 @@ npm install
 npm run dev
 ```
 
-## Deploy
-```bash
-npm run build
-```
-Then deploy the `dist/` folder to Vercel/Netlify, or connect this repo
-directly on vercel.com (no environment variables needed — the Supabase
-URL/publishable key are already in `src/supabaseClient.js` and are safe
-to be public).
+## Deploy (Vercel)
+1. Push this repo to GitHub.
+2. On [vercel.com](https://vercel.com) → **Add New… → Project** → import the repo.
+3. Set **Root Directory** to `bishal-karate` (Vercel auto-detects Vite, so
+   build command `npm run build` and output `dist` are filled in for you).
+4. Click **Deploy**.
+
+No environment variables are needed — the Supabase URL/publishable key are
+already in `src/supabaseClient.js` and are safe to be public. Every push to
+`main` redeploys automatically.
 
 ## First login
 - Admin: `bishalkarateassociation@gmail.com` (or mobile `6000259414`, or

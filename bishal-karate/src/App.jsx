@@ -2902,9 +2902,9 @@ export default function App() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await window.storage.get(STORAGE_KEY, false);
-        if (res && res.value) {
-          const saved = JSON.parse(res.value);
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const saved = JSON.parse(raw);
           const fresh = seedData();
           // Merge saved data over a fresh seed so any fields added in later
           // app updates are never missing. For resources specifically, union
@@ -2930,10 +2930,12 @@ export default function App() {
 
   useEffect(() => {
     if (!loaded) return;
-    window.storage.set(STORAGE_KEY, JSON.stringify(data), false).catch(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {
       setToast("Couldn't save — data may be too large. Try a smaller file or use a link instead.");
       setTimeout(() => setToast(""), 3500);
-    });
+    }
   }, [data, loaded]);
 
   const notify = (msg) => {
